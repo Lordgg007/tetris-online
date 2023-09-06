@@ -1,13 +1,5 @@
-const canvas = document.getElementById('tetris');
-const context = canvas.getContext('2d');
-
-context.scale(20, 20);
-
-
-
-
 //Pieces
-function createPice(type) {
+function createPiece(type) {
 	if (type === 'T') {
 		return [
 			[0, 0, 0],
@@ -25,7 +17,7 @@ function createPice(type) {
 			[0, 3, 0],
 			[0, 3, 3],
 		];
-	}  else if (type === 'J') {
+	} else if (type === 'J') {
 		return [
 			[0, 4, 0],
 			[0, 4, 0],
@@ -53,43 +45,44 @@ function createPice(type) {
 	}
 }
 
+const tetri = [];
 
-
-//coulors 
-const colors = [
-	null,
-	'red',
-	'blue',
-	'violet',
-	'green',
-	'purple',
-	'oramge',
-	'pink',
-];
-
-const tetris = new Tetris;
-
-const player = new Player;
-
-const arena = Arena(12, 20);
-
-//score
-function updateScore() {
-	document.getElementById('score').innerText = player.score;
-}
-
-//Controls
-document.addEventListener('keydown', event => {
-	if (event.keyCode === 37) { // 37 = '→' key
-		player.move(-1);
-	} else if (event.keyCode === 39) { // 39 = '←' key
-		player.move(1);
-	} else if (event.keyCode === 40) { // 40 = '↓' key
-		player.drop();
-	} else if (event.keyCode === 81) { // 81 = 'q' key
-		player.rotate(-1);
-	}
+const playerElements = document.querySelectorAll('.player');
+[...playerElements].forEach(element => {
+	const tetris = new Tetris(element);
+	tetri.push(tetris);
 });
 
-updateScore();
+const keyListener = (event) => {
+	[
+		[65, 68, 81, 69, 83],
+		[72, 75, 89, 73, 74],
+	].forEach((key, index) => {
+		const player = tetri[index].player;
+		if (event.type === 'keydown') {
+			if (event.keyCode === key[0]) {
+				player.move(-1);
+			} else if (event.keyCode === key[1]) {
+				player.move(1);
+			} else if (event.keyCode === key[2]) {
+				player.rotate(-1);
+			} else if (event.keyCode === key[3]) {
+				player.rotate(1);
+			}
+		}
 
+		if (event.keyCode === key[4]) {
+			if (event.type === 'keydown') {
+				if (player.dropInterval !== player.DROP_FAST) {
+					player.drop();
+					player.dropInterval = player.DROP_FAST;
+				}
+			} else {
+				player.dropInterval = player.DROP_SLOW;
+			}
+		}
+	});
+};
+
+document.addEventListener('keydown', keyListener);
+document.addEventListener('keyup', keyListener);
