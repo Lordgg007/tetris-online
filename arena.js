@@ -1,5 +1,5 @@
 class Arena {
-  constructor(w, h) {
+	constructor(w, h) {
 		const matrix = [];
 		while (h--) {
 			matrix.push(new Array(w).fill(0));
