@@ -3,11 +3,6 @@ class TetrisManager {
 		this.document = document;
 		this.template = document.getElementById('player-template');
 		this.instances = new Set;
-
-		const playerElements = document.querySelectorAll('.player');
-		[...playerElements].forEach(element => {
-			console.log(element);
-		});
 	}
 
 	createPlayer() {
