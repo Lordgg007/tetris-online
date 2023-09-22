@@ -1,18 +1,24 @@
-class Arena {
-	constructor(w, h) {
+class Arena
+{
+	constructor(w, h)
+	{
 		const matrix = [];
 		while (h--) {
 			matrix.push(new Array(w).fill(0));
 		}
 		this.matrix = matrix;
+
+		this.events = new Events;
 	}
 
-	clear() {
+	clear()
+	{
 		this.matrix.forEach(row => row.fill(0));
+		this.events.emit('matrix', this.matrix);
 	}
 
-	//Collision Detection
-	collide(player) {
+	collide(player)
+	{
 		const [m, o] = [player.matrix, player.pos];
 		for (let y = 0; y < m.length; ++y) {
 			for (let x = 0; x < m[y].length; ++x) {
@@ -22,7 +28,7 @@ class Arena {
 					return true;
 				}
 			}
-	}
+		}
 		return false;
 	}
 
@@ -35,6 +41,7 @@ class Arena {
 				}
 			});
 		});
+		this.events.emit('matrix', this.matrix);
 	}
 
 	sweep()
@@ -48,13 +55,14 @@ class Arena {
 				}
 			}
 
-		const row = this.matrix.splice(y, 1)[0].fill(0);
-		this.matrix.unshift(row);
-		++y;
+			const row = this.matrix.splice(y, 1)[0].fill(0);
+			this.matrix.unshift(row);
+			++y;
 
-		score += rowCount * 10;
-		rowCount *= 2;
-	}
+			score += rowCount * 10;
+			rowCount *= 2;
+		}
+		this.events.emit('matrix', this.matrix);
 		return score;
 	}
 }
