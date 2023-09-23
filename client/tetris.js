@@ -53,9 +53,7 @@ class Tetris
 			row.forEach((value, x) => {
 				if (value !== 0) {
 					this.context.fillStyle = this.colors[value];
-					this.context.fillRect(x + offset.x,
-						y + offset.y,
-						1, 1);
+					this.context.fillRect(x + offset.x,y + offset.y, 1, 1);
 				}
 			});
 		});

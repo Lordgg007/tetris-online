@@ -1,0 +1,8 @@
+{
+  "name": "tetris-online",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Lordgg007/tetris-online.git",
+  "author": "Lordgg007 <supergaudy1@gmail.com>",
+  "license": "MIT"
+}

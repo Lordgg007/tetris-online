@@ -2,10 +2,10 @@ class TetrisManager
 {
 	constructor(document)
 	{
-		this.document = document;
-		this.template = this.document.querySelector('#player-template');
+	this.document = document;
+	this.template = this.document.querySelector('#player-template');
 
-		this.instances = [];
+	this.instances = [];
 	}
 
 	createPlayer()
@@ -25,9 +25,9 @@ class TetrisManager
 
 	removePlayer(tetris)
 	{
-		this.document.body.removeChild(tetris.element);
+	this.document.body.removeChild(tetris.element);
 
-		this.instances = this.instances.filter(instance => instance !== tetris);
+	this.instances = this.instances.filter(instance => instance !== tetris);
 	}
 
 	sortPlayers(tetri)
