@@ -2,18 +2,18 @@ class Client
 {
   constructor(conn, id)
 {
-    this.conn = conn;
-    this.id = id;
-    this.session = null;
+  this.conn = conn;
+  this.id = id;
+  this.session = null;
 
     this.state = {
       arena: {
-          matrix: [],
+        matrix: [],
       },
       player: {
-          matrix: [],
-          pos: {x: 0, y: 0},
-          score: 0,
+        matrix: [],
+        pos: {x: 0, y: 0},
+        score: 0,
       },
     };
   }
